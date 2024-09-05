@@ -42,7 +42,7 @@ function LiftControl () {
                 min="1" max="7" 
                 placeholder='enter floor'/>
                 {" "}
-                <button onClick >Move</button>
+                <button onClick={() =>handleCall(document.querySelector('input').value)}>Move</button>
             </div>
         </div>
     )

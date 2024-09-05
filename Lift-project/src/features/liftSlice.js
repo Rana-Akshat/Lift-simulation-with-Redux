@@ -14,13 +14,13 @@ export const liftSlice = createSlice({
             const { floor } = action.payload
             if(state.calledFloors < floor){
                 state.calledFloors.push(floor)
-                const diff = state.currentFloor - floor
-                state.currentFloor = state.currentFloor + diff
+                const diff = floor - state.currentFloor
+                state.currentFloor += diff
             }
             else if(state.calledFloors > floor){
                 state.calledFloors.push(floor)
-                const diff = floor - state.currentFloor
-                state.currentFloor = state.currentFloor - diff
+                const diff = state.currentFloor - floor
+                state.currentFloor -= diff
             }
             else{
                 state.currentFloor.push(floor)
