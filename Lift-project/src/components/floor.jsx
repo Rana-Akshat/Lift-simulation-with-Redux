@@ -4,7 +4,7 @@ import { callFloor, moveup, movedown } from '../features/liftSlice'
 
 function LiftControl () {
     const dispatch = useDispatch()
-    const { currentFloor, direction, calledFloors } = useSelector((state) => state.elevator)
+    const { currentFloor } = useSelector((state) => state.elevator)
 
     const handleCall = (floor) => {
             dispatch(callFloor({floor}))
@@ -24,26 +24,30 @@ function LiftControl () {
 
     return(
         <div className='container'>
+            <div className="movebttn">
+                <input type="number"
+                min="1" max="7" 
+                placeholder='Enter floor number'/>
+                {" "}
+                <button onClick={() =>handleCall(document.querySelector('input').value)}>Move</button>
+                {" "}
+                <button onClick={handleMoveUp}>Up</button>
+                {" "}
+                <button onClick={handleMoveDown}>Down</button>
+            </div>
             {[7, 6, 5, 4, 3, 2, 1].map(floor => (
                 <div className='floorkey' key={floor}>
                     <div className='floornumber'>Floor - {floor}</div>
-                    {floor < 7 && (
-                    <button onClick={handleMoveUp}>Up</button>)}
-                    {" "}
                     {floor > 1 && (
-                    <button onClick={handleMoveDown}>Down</button>)}
+                    <button onClick={handleMoveUp} disabled = {currentFloor === floor}>Up</button>)}
+                    {" "}
+                    {floor < 7 && (
+                    <button onClick={handleMoveDown} disabled = {currentFloor === floor}>Down</button>)}
                     {currentFloor === floor && (
                         <div className = 'liftbox'></div>
                     )}
                 </div>
             ))}
-            <div className="movebttn">
-                <input type="number"
-                min="1" max="7" 
-                placeholder='enter floor'/>
-                {" "}
-                <button onClick={() =>handleCall(document.querySelector('input').value)}>Move</button>
-            </div>
         </div>
     )
 }
