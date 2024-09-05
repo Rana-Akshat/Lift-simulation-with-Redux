@@ -32,7 +32,7 @@ function LiftControl () {
                     {" "}
                     {floor > 1 && (
                     <button onClick={handleMoveDown}>Down</button>)}
-                    {currentFloor === floor && direction === null && (
+                    {currentFloor === floor && (
                         <div className = 'liftbox'></div>
                     )}
                 </div>

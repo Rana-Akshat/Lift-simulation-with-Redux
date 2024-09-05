@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currentFloor: 1,
-    direction: null,
     calledFloors: [], 
 }
 
@@ -28,19 +27,17 @@ export const liftSlice = createSlice({
             }
         },
         moveup: (state) => {
-            state.direction = 'up'
             state.currentFloor = state.currentFloor + 1
             state.calledFloors = state.calledFloors.filter(floor => floor !== state.currentFloor)
             if(state.calledFloors.length === 0){
-                state.direction = null
+                state.calledFloors = state.currentFloor
             }
         },
         movedown: (state) => {
-            state.direction = 'down'
             state.currentFloor -= 1
             state.calledFloors = state.calledFloors.filter(floor => floor !== state.currentFloor)
             if(state.calledFloors.length === 0){
-                state.direction = null
+                state.calledFloors = state.currentFloor
             }
         }
     }
